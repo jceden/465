@@ -1,10 +1,29 @@
-<h1>Whois Utility</h1>
+<h1>Justin's World Ladder Game</h1>
 <br>
 <br>
 <br>
-<%= form_tag(query_path, method: "get") do  %>
-    <%= label_tag(:query, "URL: ") %>
-    <%= text_field_tag(:query) %>
-    <%= submit_tag("Lookup") %>
+<%= form_tag(wladder_path, method: "get") do  %>
+    <%= label_tag(:word0, "Start Word:  " + @start_word) %>
+   <!-- <%= text_field_tag(:wladder) %>a-->
+  <!-- <%= submit_tag("Lookup") %>-->
+<br>
+	<%= label_tag(:word1, "Word 1: ") %>
+	<%= text_field_tag(:guess1) %>
+<br>	
+	<%= label_tag(:word2, "Word 2: ") %>
+	<%= text_field_tag(:guess2) %>
+<br>
+	<%= label_tag(:word3, "Word 3: ") %>
+	<%= text_field_tag(:guess3) %>
+<br> 
+	<%= label_tag(:word4, "Word 4: ") %>
+	<%= text_field_tag(:guess4) %>
+<br>
+	<%= label_tag(:word5, "Word 5: ") %>
+	<%= text_field_tag(:guess5) %>
+	<%= submit_tag("Check Answer")%>
+<br>
+    <%= label_tag(:word6, "End Word: " + @end_word) %>
+<br>
 <% end %>
 <br>
