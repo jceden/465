@@ -1,7 +1,11 @@
 <%=link_to "Play Again", root_path %>
-
 <br>
-<% @result.each do |line| %>
+<strong><%= @result %></strong>
+<br>
+<strong><%='Your Guesses:'%></strong>
+<br>
+<br>
+<% @array.each do |line| %>
     <%= line %>
     <br>
 <% end %>

@@ -3,9 +3,8 @@
 <br>
 <br>
 <%= form_tag(wladder_path, method: "get") do  %>
-    <%= label_tag(:word0, "Start Word:  " + @start_word) %>
-   <!-- <%= text_field_tag(:wladder) %>a-->
-  <!-- <%= submit_tag("Lookup") %>-->
+	<%= "Start: " + @start_word%>
+    <%= hidden_field_tag(:word0, @start_word) %>
 <br>
 	<%= label_tag(:word1, "Word 1: ") %>
 	<%= text_field_tag(:guess1) %>
@@ -23,7 +22,8 @@
 	<%= text_field_tag(:guess5) %>
 	<%= submit_tag("Check Answer")%>
 <br>
-    <%= label_tag(:word6, "End Word: " + @end_word) %>
+<%= "End word: " + @end_word %>
+    <%= hidden_field_tag(:word6, @end_word) %>
 <br>
 <% end %>
 <br>
