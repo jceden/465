@@ -1,12 +1,18 @@
 <%=link_to "Play Again", root_path %>
 <br>
-<strong><%= @result %></strong>
+<%=link_to "Home", "http://ec2-54-183-242-35.us-west-1.compute.amazonaws.com/"%>
+<br>
+<br>
+<font size ="8"><strong><%= @result %></strong></font>
+<br>
 <br>
 <strong><%='Your Guesses:'%></strong>
 <br>
 <br>
 <% @array.each do |line| %>
-    <%= line %>
-    <br>
+	<%= line %>
+   	 <br>
+	<br>
 <% end %>
+</table>
 
