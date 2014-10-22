@@ -2,10 +2,10 @@ class UrlsController < ApplicationController
   before_action :set_url, only: [:show, :edit, :update, :destroy]
 
   # GET /urls
-  # GET /urls.json
-  def index
-    @urls = Url.all
-  end
+	def index
+ 	@doi = Doi.find params[:doi_id]
+	@urls = @doi.urls
+	end
 
   # GET /urls/1
   # GET /urls/1.json
@@ -14,7 +14,8 @@ class UrlsController < ApplicationController
 
   # GET /urls/new
   def new
-    @url = Url.new
+    @doi = Doi.find params[:doi_id]
+	@url = @doi.urls.new
   end
 
   # GET /urls/1/edit
@@ -24,30 +25,22 @@ class UrlsController < ApplicationController
   # POST /urls
   # POST /urls.json
   def create
-    @url = Url.new(url_params)
-
-    respond_to do |format|
-      if @url.save
-        format.html { redirect_to @url, notice: 'Url was successfully created.' }
-        format.json { render :show, status: :created, location: @url }
-      else
-        format.html { render :new }
-        format.json { render json: @url.errors, status: :unprocessable_entity }
-      end
-    end
+	@doi = Doi.find params[:doi_id]
+    @url = @doi.urls.new(url_params)
+	if @url.save
+	redirect_to doi_urls_url(@doi) , notice: 'URL was successfuly created'
+	else
+	render :new
+	end
   end
 
   # PATCH/PUT /urls/1
   # PATCH/PUT /urls/1.json
   def update
-    respond_to do |format|
       if @url.update(url_params)
-        format.html { redirect_to @url, notice: 'Url was successfully updated.' }
-        format.json { render :show, status: :ok, location: @url }
-      else
-        format.html { render :edit }
-        format.json { render json: @url.errors, status: :unprocessable_entity }
-      end
+	redirect_to doi_url_url(@url.doi), notice: 'URL was successfully created.'
+	else
+	render :edit
     end
   end
 
@@ -55,10 +48,7 @@ class UrlsController < ApplicationController
   # DELETE /urls/1.json
   def destroy
     @url.destroy
-    respond_to do |format|
-      format.html { redirect_to urls_url, notice: 'Url was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+	redirect_to doi_url_url(@url.uri) , notice: 'URL was successfully destroyed'
   end
 
   private
