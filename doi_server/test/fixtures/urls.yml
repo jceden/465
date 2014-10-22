@@ -1,11 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  url_add: MyString
+  address: MyString
   comment: MyString
   doi_id: 
 
 two:
-  url_add: MyString
+  address: MyString
   comment: MyString
   doi_id: 
