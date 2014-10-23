@@ -10,11 +10,13 @@ class DoisController < ApplicationController
   # GET /dois/1
   # GET /dois/1.json
   def show
+	@url = @doi.urls.new
   end
 
   # GET /dois/new
   def new
     @doi = Doi.new
+	@doi.urls.new
   end
 
   # GET /dois/1/edit
@@ -69,6 +71,6 @@ class DoisController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def doi_params
-      params.require(:doi).permit(:doi_num)
+      params.require(:doi).permit(:doi_num, urls_attributes: [:address, :comment])
     end
 end

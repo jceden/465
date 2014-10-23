@@ -11,19 +11,25 @@
   </thead>
 
   <tbody>
-    <% @urls.each do |url| %>
+    <% @doi.urls.each do |url| %>
+<% if !url.new_record? %>
       <tr>
-        <td><%= url.address %></td>
+        <td><%= url.address %></td>&nbsp&nbsp
         <td><%= url.comment %></td>
-        <td><%= url.doi %></td>
         <td><%= link_to 'Show', url %></td>
         <td><%= link_to 'Edit', edit_url_path(url) %></td>
         <td><%= link_to 'Destroy', url, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
+<%end%>
     <% end %>
   </tbody>
 </table>
+<br>
+<br>
+<h3> Create New URL</h3>
+<%= render 'urls/form' %>
+<br>
 
 <br>
 
-<%= link_to 'New Url', new_url_path %>
+<%= link_to 'Url List', dois_path %>

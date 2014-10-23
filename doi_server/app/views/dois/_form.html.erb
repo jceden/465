@@ -15,7 +15,20 @@
     <%= f.label :doi_num %><br>
     <%= f.number_field :doi_num %>
   </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+<%= f.fields_for :urls do |urls_form| %>
+	<h3>New URL</h3>
+	<div style="margin-left:30px;">
+	<div class="field">
+	<%= urls_form.label :address %><br>
+	<%= urls_form.text_field :address %>
+	</div>
+	<div class="field>
+	<%=urls_form.label :comment %><br>
+	<%=urls_form.text_field :comment %>
+	</div>
+	<% end %>
+<br>
+<div class="actions">
+<%= f.submit%>
+</div>
 <% end %>

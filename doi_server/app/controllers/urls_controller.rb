@@ -1,17 +1,6 @@
 class UrlsController < ApplicationController
   before_action :set_url, only: [:show, :edit, :update, :destroy]
 
-  # GET /urls
-	def index
- 	@doi = Doi.find params[:doi_id]
-	@urls = @doi.urls
-	end
-
-  # GET /urls/1
-  # GET /urls/1.json
-  def show
-  end
-
   # GET /urls/new
   def new
     @doi = Doi.find params[:doi_id]
@@ -27,6 +16,7 @@ class UrlsController < ApplicationController
   def create
 	@doi = Doi.find params[:doi_id]
     @url = @doi.urls.new(url_params)
+
 	if @url.save
 	redirect_to doi_urls_url(@doi) , notice: 'URL was successfuly created'
 	else
@@ -38,7 +28,7 @@ class UrlsController < ApplicationController
   # PATCH/PUT /urls/1.json
   def update
       if @url.update(url_params)
-	redirect_to doi_url_url(@url.doi), notice: 'URL was successfully created.'
+	redirect_to doi_urls_url(@url.doi), notice: 'URL was successfully created.'
 	else
 	render :edit
     end
@@ -48,7 +38,7 @@ class UrlsController < ApplicationController
   # DELETE /urls/1.json
   def destroy
     @url.destroy
-	redirect_to doi_url_url(@url.uri) , notice: 'URL was successfully destroyed'
+	redirect_to doi_urls_url(@url.doi) , notice: 'URL was successfully destroyed'
   end
 
   private

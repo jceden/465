@@ -1,4 +1,4 @@
-<%= form_for(@url) do |f| %>
+<%= form_for([@doi, @url]) do |f| %>
   <% if @url.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@url.errors.count, "error") %> prohibited this url from being saved:</h2>
