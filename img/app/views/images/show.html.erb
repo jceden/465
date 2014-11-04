@@ -1,0 +1,21 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Filename:</strong>
+  <%= @image.filename %>
+</p>
+
+<p>
+  <strong>Private:</strong>
+  <%= @image.private%>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @image.user_id %>
+</p>
+<p>
+	<%= image_tag root_url + "/images/" + @image.filename, size: "100x100", alt: @image.filename %>
+
+<%= link_to 'Edit', edit_image_path(@image) %> |
+<%= link_to 'Back', images_path %>
