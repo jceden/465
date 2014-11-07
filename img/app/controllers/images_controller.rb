@@ -5,6 +5,7 @@ class ImagesController < ApplicationController
   # GET /images.json
   def index
     @images = Image.all
+	render :index
   end
 
   # GET /images/1
@@ -21,24 +22,26 @@ class ImagesController < ApplicationController
   def edit
   end
 
-  def generate_filename
-	@image.filename = [('a'..'z'), ('A'..'Z')].map { |i| i.to_a }.flatten
-  end
   # POST /images
   # POST /images.json
   def create
     @image = Image.new(image_params)
 	@image.generate_filename
-	@image.user = current_user
+	@image.user_id = current_user
 	@uploaded_io = params[:image][:uploaded_file]
-	File.open(Rails.root.join('public','images',@image.filename), 'wb') do |file|
-		file.write(@uploaded_io.read)
-	end
+	if @uploaded_io != nil
+		File.open(Rails.root.join('public','images',@image.filename), 'wb') do |file|
+			file.write(@uploaded_io.read)
+		end
 
-	if @image.save
-		redirect_to @image, notice: 'Image was successfully created'
+		if @image.save
+			redirect_to @image, notice: 'Image was successfully created'
+		else
+			render :new
+		end
 	else
-		render :new
+		@image.destroy
+		index
 	end
 end
 

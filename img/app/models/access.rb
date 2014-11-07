@@ -1,4 +1,4 @@
 class Access < ActiveRecord::Base
-  belongs_to :image_id
-  belongs_to :user_id
+  belongs_to :image
+  belongs_to :user
 end

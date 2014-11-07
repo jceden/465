@@ -1,9 +1,7 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Filename:</strong>
-  <%= @image.filename %>
-</p>
+<%= link_to 'Edit', edit_image_path(@image) %> |
+<%= link_to 'Back', images_path %>
 
 <p>
   <strong>Private:</strong>
@@ -15,7 +13,6 @@
   <%= @image.user_id %>
 </p>
 <p>
-	<%= image_tag root_url + "/images/" + @image.filename, size: "100x100", alt: @image.filename %>
+	<%= image_tag root_url + "/images/" + @image.filename, alt: @image.filename %>
+<br>
 
-<%= link_to 'Edit', edit_image_path(@image) %> |
-<%= link_to 'Back', images_path %>

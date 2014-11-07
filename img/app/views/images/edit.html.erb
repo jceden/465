@@ -1,6 +1,28 @@
 <h1>Editing image</h1>
-
-<%= render 'form' %>
-
+<%= form_for(@image) do |f| %>
+<%= f.file_field :uploaded_file%>
+<% if @image.errors.any? %>
+	<div id="error_explanation">
+	<h2><%= pluralize(@image.errors.count, "error") %> prohibited this image from being saved: </h2>
+	<ul>
+	<% @image.errors.full_messages.each do |message| %>
+		<li><%= message %></li>
+	<%end%>
+	</ul>
+	</div>
+<%end%>
+<p>
+	<%= image_tag root_url + "/images/" + @image.filename, size: "100x100", alt: @image.filename %>
+<br>
+</p>
+<div class="field">
+	<%= f.label :private %><br>
+	<%= f.check_box :private %>
+</div>
+<div class ="actions">
+	<%= f.submit %>
+</div>
+<%end%>
+<%= button_to "delete", @image, :method => :delete %>
 <%= link_to 'Show', @image %> |
 <%= link_to 'Back', images_path %>

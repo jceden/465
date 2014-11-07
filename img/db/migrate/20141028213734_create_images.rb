@@ -3,7 +3,7 @@ class CreateImages < ActiveRecord::Migration
     create_table :images do |t|
       t.string :filename
       t.boolean :private
-      t.references :user_id, index: true
+      t.references :user, index: true
 
       t.timestamps
     end
