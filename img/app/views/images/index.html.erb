@@ -3,21 +3,20 @@
 <h1>Listing images</h1>
 
 <table>
-  <thead>
-    <tr>
-      <th>User</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
 
   <tbody>
     <% @images.each do |image| %>
       <tr>
+	<% if user_signed_in? %>
 	<td><%= image_tag root_url + "/images/" + image.filename, size: "100x100", alt: image.filename %>
         <td><%= image.user_id %></td>
         <td><%= link_to 'Show', image %></td>
         <td><%= link_to 'Edit', edit_image_path(image) %></td>
       </tr>
+	<%else%>
+	<td><%= image_tag root_url + "/images/" + image.filename, size: "100x100", alt: image.filename %>
+        <td><%= image.user_id %></td>
+	<%end%>
     <% end %>
   </tbody>
 </table>
