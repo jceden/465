@@ -1,27 +1,31 @@
 <%= link_to("Home", "http://ec2-54-183-242-35.us-west-1.compute.amazonaws.com/")%>
 <br>
-<h1>Listing images</h1>
 
+<% if user_signed_in?%>
+<br>
+<%= link_to "New Image", new_image_path %>
+<%end%>
 <table>
-
   <tbody>
-    <% @images.each do |image| %>
-      <tr>
-	<% if user_signed_in? %>
-	<td><%= image_tag root_url + "/images/" + image.filename, size: "100x100", alt: image.filename %>
-        <td><%= image.user_id %></td>
-        <td><%= link_to 'Edit', edit_image_path(image) %></td>
-	<%else%>
-	<td><%= image_tag root_url + "/images/" + image.filename, size: "100x100", alt: image.filename %>
-        <td><%= image.user_id %></td>
+	<% if user_signed_in?%>
+	<h1>My Images</h1><br>
+		<% @my_images.each do |image| %>
+      		<tr>
+       			<%= link_to 'Show', image %><br>
+			<%= image_tag root_url + "images/" + image.filename, size: "100x100", alt: image.filename %><br>
+		<%end%>
 	<%end%>
-        <td><%= link_to 'Show', image %></td>
       </tr>
-    <% end %>
   </tbody>
 </table>
 
+<table>
+  <tbody>
+<h1>Public Images</h1>
+   <% @p_images.each do |image| %>
+       	<%= link_to 'Show', image %><br>
+	<%= image_tag root_url + "images/" + image.filename, size: "100x100", alt: image.filename %><br>
+	<tr>
+   <%end%>
+
 <br>
-<% if user_signed_in?%>
-<%= link_to 'New Image', new_image_path %>
-<%end%>

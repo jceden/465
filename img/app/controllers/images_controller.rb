@@ -4,8 +4,14 @@ class ImagesController < ApplicationController
   # GET /images
   # GET /images.json
   def index
-    @images = Image.all
-	render :index
+	if user_signed_in?
+	@my_images = Image.where(user_id: current_user.id)
+	@my_shared_images
+	@public_images = (Image.where(private: false))
+	@p_images = @public_images.where.not(user_id: current_user.id)
+	else
+	@p_images = Image.where(private: false)
+	end
   end
 
   # GET /images/1
@@ -20,6 +26,7 @@ class ImagesController < ApplicationController
 
   # GET /images/1/edit
   def edit
+	@image.user
   end
 
   # POST /images
@@ -27,7 +34,7 @@ class ImagesController < ApplicationController
   def create
     @image = Image.new(image_params)
 	@image.generate_filename
-	@image.user_id = current_user
+	@image.user = current_user
 	@uploaded_io = params[:image][:uploaded_file]
 	if @uploaded_io != nil
 		File.open(Rails.root.join('public','images',@image.filename), 'wb') do |file|

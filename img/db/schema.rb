@@ -14,14 +14,14 @@
 ActiveRecord::Schema.define(version: 20141028214613) do
 
   create_table "accesses", force: true do |t|
-    t.integer  "image_id_id"
-    t.integer  "user_id_id"
+    t.integer  "image_id"
+    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "accesses", ["image_id_id"], name: "index_accesses_on_image_id_id"
-  add_index "accesses", ["user_id_id"], name: "index_accesses_on_user_id_id"
+  add_index "accesses", ["image_id"], name: "index_accesses_on_image_id"
+  add_index "accesses", ["user_id"], name: "index_accesses_on_user_id"
 
   create_table "images", force: true do |t|
     t.string   "filename"
