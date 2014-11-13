@@ -16,6 +16,9 @@
   <%= @image.user.name %>
 </p>
 <p>
+<strong>Tags:</strong>
+<%= @image.tags%>
+<p>
 	<%= image_tag root_url + "/images/" + @image.filename, alt: @image.filename %>
 <br>
 

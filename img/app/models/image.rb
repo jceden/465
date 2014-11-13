@@ -9,4 +9,7 @@ class Image < ActiveRecord::Base
 		generate_filename
 		end
 	end
+	def user_dropdown
+	(User.all - self.users).map {|image| "image.name" + "(image.email)" + image.id if image.id != self.user_id}
+	end
 end

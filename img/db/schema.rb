@@ -35,12 +35,12 @@ ActiveRecord::Schema.define(version: 20141028214613) do
 
   create_table "tags", force: true do |t|
     t.string   "tag_string"
-    t.integer  "image_id_id"
+    t.integer  "image_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "tags", ["image_id_id"], name: "index_tags_on_image_id_id"
+  add_index "tags", ["image_id"], name: "index_tags_on_image_id"
 
   create_table "users", force: true do |t|
     t.string   "name",                   default: "", null: false
