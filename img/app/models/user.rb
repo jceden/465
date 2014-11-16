@@ -6,5 +6,6 @@ class User < ActiveRecord::Base
 
   has_many :images
   has_many :accesses
+	validates :name, presence: :true
 
 end

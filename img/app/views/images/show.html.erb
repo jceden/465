@@ -12,12 +12,36 @@
 </p>
 
 <p>
-  <strong>User:</strong>
+  <strong>Owner:</strong>
   <%= @image.user.name %>
 </p>
 <p>
-<strong>Tags:</strong>
-<%= @image.tags%>
+<strong>Tags:</strong><br>
+<%if @image.tags.length == 1%>
+No Tags assigned to this image
+<%= render 'tags/form' %>
+<%else%>
+<% @image.tags.each do |tag|%>
+  <% if !tag.new_record? %>
+    <%= tag.tag_string%>
+    <%= link_to 'delete', tag_path(tag), method: :delete %>
+  <% end %>
+<br>
+<%end%>
+<%= render 'tags/form' %>
+<%end%>
+<br>
+<% if @image.private == true %>
+<strong>Users with Access:</strong>
+<br>
+<% @image.accesses.each do |access|%>
+<% if !access.new_record?%>
+<%="Name: " + access.user.name + " (" + access.user.email + ")"%>
+<%end%>
+<br>
+<%end%>
+<%= render 'accesses/form' %>
+<%end%>
 <p>
 	<%= image_tag root_url + "/images/" + @image.filename, alt: @image.filename %>
 <br>

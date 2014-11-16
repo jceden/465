@@ -5,8 +5,9 @@ class ImagesController < ApplicationController
   # GET /images.json
   def index
 	if user_signed_in?
+#only return the images that have the signed in user's ID associated with them
 	@my_images = Image.where(user_id: current_user.id)
-	@my_shared_images
+	@my_shared_images = current_user.accesses.map {|access| access.image if access.image.user != current_user}.compact
 	@public_images = (Image.where(private: false))
 	@p_images = @public_images.where.not(user_id: current_user.id)
 	else
@@ -17,6 +18,8 @@ class ImagesController < ApplicationController
   # GET /images/1
   # GET /images/1.json
   def show
+	@tag = @image.tags.new
+	@access = @image.accesses.new
   end
 
   # GET /images/new
@@ -26,7 +29,6 @@ class ImagesController < ApplicationController
 
   # GET /images/1/edit
   def edit
-	@image.user
   end
 
   # POST /images
@@ -55,6 +57,12 @@ end
   # PATCH/PUT /images/1
   # PATCH/PUT /images/1.json
   def update
+	@uploaded_io = params[:image][:uploaded_file]
+	if @uploaded_io != nil
+		File.open(Rails.root.join('public','images',@image.filename)) do |file|
+			file.write(@image.filename)
+		end
+	end
     respond_to do |format|
       if @image.update(image_params)
         format.html { redirect_to @image, notice: 'Image was successfully updated.' }
@@ -74,6 +82,8 @@ end
       format.html { redirect_to images_url, notice: 'Image was successfully destroyed.' }
       format.json { head :no_content }
     end
+path = Rails.root.join('public','image',self.filename)
+File.delete(path)
   end
 
   private

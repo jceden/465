@@ -16,12 +16,8 @@
     <%= f.label :private %><br>
     <%= f.check_box :private %>
   </div>
-<%=f.fields_for :tags do |tags_form|%>
-	<%=tags_form.label :tag%>
-	<%=tags_form.text_field :tag%>
 <br>
-<br>
-<%end%>
+
   <div class="actions">
     <%= f.submit %>
   </div>
