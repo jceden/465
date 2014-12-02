@@ -20,6 +20,9 @@ class ImagesController < ApplicationController
   def show
 	@tag = @image.tags.new
 	@access = @image.accesses.new
+	if(@image.private == false)
+		@image.accesses.destroy
+	end
   end
 
   # GET /images/new
@@ -60,7 +63,7 @@ end
 	@uploaded_io = params[:image][:uploaded_file]
 	if @uploaded_io != nil
 		File.open(Rails.root.join('public','images',@image.filename)) do |file|
-			file.write(@image.filename)
+			file.write(@uploaded_io.uploaded_file)
 		end
 	end
     respond_to do |format|
@@ -72,6 +75,9 @@ end
         format.json { render json: @image.errors, status: :unprocessable_entity }
       end
     end
+	if(@image.private == false)
+		@image.accesses.destroy
+	end
   end
 
   # DELETE /images/1

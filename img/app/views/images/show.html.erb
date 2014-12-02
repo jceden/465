@@ -31,6 +31,7 @@ No Tags assigned to this image
 <%= render 'tags/form' %>
 <%end%>
 <br>
+<% if user_signed_in? && current_user.id == @image.user_id %>
 <% if @image.private == true %>
 <strong>Users with Access:</strong>
 <br>
@@ -41,6 +42,7 @@ No Tags assigned to this image
 <br>
 <%end%>
 <%= render 'accesses/form' %>
+<%end%>
 <%end%>
 <p>
 	<%= image_tag root_url + "/images/" + @image.filename, alt: @image.filename %>

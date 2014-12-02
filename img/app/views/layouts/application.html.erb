@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<%= javascript_include_tag :application %>
 <div id="user_nav">
 <% if user_signed_in? %>
 Signed in as <%= current_user.email %>. Not you?
